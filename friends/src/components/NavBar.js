@@ -20,7 +20,7 @@ function NavBar() {
   // styled components
   
   const NavHeader = styled.header`
-      border: 1px solid black
+      border-bottom: 1px solid black
       display: flex
       justify-content: space-around
       align-items: center

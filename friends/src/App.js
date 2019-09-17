@@ -8,6 +8,7 @@ import Login from './components/Login'
 import PrivateRoute from './components/PrivateRoute'
 import FriendList from './components/FriendList'
 import AddFriend from './components/AddFriend'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <Route path='/login' component={Login} />
       <PrivateRoute exact path='/friendlist' component={AddFriend} />
       <PrivateRoute exact path='/friendlist' component={FriendList} />
-
+      <Footer />
     </div>
   );
 }

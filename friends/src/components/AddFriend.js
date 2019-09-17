@@ -19,22 +19,26 @@ function AddFriend({ postFriend }) {
     }
     return (
         <AddFriendForm onSubmit={addFriend}>
-            <input
+            <h2>Add Your New Friend</h2>
+            <AddFriendInput
                 type="text"
                 name="name"
                 value={newFriendName}
+                placeholder="name"
                 onChange={(e) => {setNewFriendName(e.target.value)}}
             />
-            <input
+            <AddFriendInput
                 type="text"
                 name="age"
                 value={newFriendAge}
+                placeholder="age"
                 onChange={(e) => {setNewFriendAge(e.target.value)}}
             />
-            <input
+            <AddFriendInput
                 type="email"
                 name="email"
                 value={newFriendEmail}
+                placeholder="mail@email.com"
                 onChange={(e) => {setNewFriendEmail(e.target.value)}}
             />
             <button>Add Friend</button>
@@ -55,6 +59,14 @@ const mapStateToProps = state => {
   // styled components
 
   const AddFriendForm = styled.form`
-    margin: 20px
+    display: flex
+    flex-direction: column
+    width: 200px
+    margin: 20px auto
+  `
+
+  const AddFriendInput = styled.input`
+    margin: 10px
+    padding: 10px
   `
 
