@@ -19,7 +19,7 @@ function AddFriend({ postFriend }) {
     }
     return (
         <AddFriendForm onSubmit={addFriend}>
-            <h2>Add Your New Friend</h2>
+            <h2>Add Your Friend</h2>
             <AddFriendInput
                 type="text"
                 name="name"
