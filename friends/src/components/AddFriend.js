@@ -1,65 +1,60 @@
-import React from 'react'
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { postFriend } from '../utils/actions'
+import styled from 'styled-components'
 
-class AddFriend extends React.Component {
-    state = {
-      friend: {
-        name: '',
-        age: '',
-        email: ''
-      }
-    };
-  
-    handleChange = e => {
-      this.setState({
-        friend: {
-          ...this.state.friend,
-          [e.target.name]: e.target.value
+function AddFriend({ postFriend }) {
+    const [newFriendName, setNewFriendName] = useState('')
+    const [newFriendAge, setNewFriendAge] = useState('')
+    const [newFriendEmail, setNewFriendEmail] = useState('')
+
+    const addFriend = (e) => {
+        e.preventDefault()
+        let newFriend = {
+            name: newFriendName,
+            age: newFriendAge,
+            email: newFriendEmail
         }
-      });
-      console.log('log of state after handleChange', this.state)
-    };
-  
-    addFriend = e => {
-      e.preventDefault();
-      // axiosWithAuth ==> ?? an axios instance; .post() ==> ?? promise
-      axiosWithAuth()
-        .post('/friends', this.state.friend)
-        .then(res => {
-          console.log('log from post request', res)
-        })
-        .catch(err => console.log(err));
-    };
-  
-    render() {
-      return (
-        <div>
-          <br/>
-          <br/>
-          <form onSubmit={this.addFriend}>
+        postFriend(newFriend)
+    }
+    return (
+        <AddFriendForm onSubmit={addFriend}>
             <input
-              type="text"
-              name="name"
-              value={this.state.friend.name}
-              onChange={this.handleChange}
+                type="text"
+                name="name"
+                value={newFriendName}
+                onChange={(e) => {setNewFriendName(e.target.value)}}
             />
             <input
-              type="text"
-              name="age"
-              value={this.state.friend.age}
-              onChange={this.handleChange}
+                type="text"
+                name="age"
+                value={newFriendAge}
+                onChange={(e) => {setNewFriendAge(e.target.value)}}
             />
             <input
-              type="email"
-              name="email"
-              value={this.state.friend.email}
-              onChange={this.handleChange}
+                type="email"
+                name="email"
+                value={newFriendEmail}
+                onChange={(e) => {setNewFriendEmail(e.target.value)}}
             />
-            <button>Log in</button>
-          </form>
-        </div>
-      );
+            <button>Add Friend</button>
+        </AddFriendForm>
+    )
+}
+
+const mapStateToProps = state => {
+    return {
+      friends: state.friends,
+      isFetching: state.isFetching,
+      error: state.error
     }
   }
   
-  export default AddFriend;
+  export default connect(mapStateToProps, { postFriend })(AddFriend)
+
+  // styled components
+
+  const AddFriendForm = styled.form`
+    margin: 20px
+  `
+

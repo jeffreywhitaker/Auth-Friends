@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import FriendCard from './FriendCard'
 
-export default function FriendList() {
-    const [ friends, setFriends ] = useState([])
+import { getFriends } from '../utils/actions'
+
+function FriendList({ getFriends, friends}) {
+
     useEffect(() => {
-        axiosWithAuth().get('/friends')
-            .then(res => {
-                console.log(res)
-                setFriends(res.data)
-            })
-            .catch(err => console.log(err))
-      }, []);
-
-
+        getFriends()
+    }, [getFriends])
 
     return (
         <div>
@@ -24,3 +18,13 @@ export default function FriendList() {
         </div>
     )
 } 
+
+const mapStateToProps = state => {
+    return {
+      friends: state.friends,
+      isFetching: state.isFetching,
+      error: state.error
+    }
+  }
+  
+  export default connect(mapStateToProps, {getFriends})(FriendList)
