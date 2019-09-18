@@ -10,17 +10,23 @@ import FriendList from './components/FriendList'
 import AddFriend from './components/AddFriend'
 import Footer from './components/Footer'
 
+import styled from 'styled-components'
+
 function App() {
   return (
-    <div className="App">
+    <AppDiv className="App">
       <NavBar />
       <Route exact path='/' component={Home} />
       <Route path='/login' component={Login} />
       <PrivateRoute exact path='/friendlist' component={AddFriend} />
       <PrivateRoute exact path='/friendlist' component={FriendList} />
       <Footer />
-    </div>
+    </AppDiv>
   );
 }
 
 export default App;
+
+const AppDiv = styled.div`
+  background: lightgray
+`

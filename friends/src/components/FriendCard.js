@@ -29,7 +29,7 @@ function FriendCard({ friend, deleteFriend, updateFriend }) {
             <p>Age: {friend.age}</p>
             <p>email: {friend.email}</p>
             <button onClick={handleUpdateFriend}>Update</button>
-            <button onClick={handleDeleteFriend}>Delete Friend</button>
+            <button onClick={handleDeleteFriend}>Delete</button>
         </FriendCardDiv>
     )
 } 
