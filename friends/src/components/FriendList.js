@@ -9,7 +9,7 @@ function FriendList({ getFriends, friends}) {
 
     useEffect(() => {
         getFriends()
-    }, [getFriends])
+    }, [])
 
     return (
         <>
